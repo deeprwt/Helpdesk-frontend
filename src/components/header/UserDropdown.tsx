@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React,{ useEffect, useState }  from "react";
 import { useRouter } from "next/navigation"; // 👈 needed for redirect
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+    const [user, setUser] = useState<any>(null);
   const router = useRouter();
 
 function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -32,6 +33,25 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
       console.error("Logout failed:", err);
     }
   }
+
+  
+  // ✅ Fetch user info when component mounts
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, {
+          credentials: "include",
+        });
+        if (!res.ok) throw new Error("Not authenticated");
+        const data = await res.json();
+        setUser(data);
+      } catch (err) {
+        console.error(err);
+        setUser(null);
+      }
+    }
+    fetchUser();
+  }, []);
   return (
     <div className="relative">
       <button
@@ -47,7 +67,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
           />
         </span>
 
-        <span className="block mr-1 font-medium text-theme-sm">Musharof</span>
+        <span className="block mr-1 font-medium text-theme-sm">{user ? user.name : "Loading..."}</span>
 
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
@@ -76,10 +96,10 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            Musharof Chowdhury
+       {user ? user.name : "Guest"}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+        {user ? user.email : ""}
           </span>
         </div>
 
@@ -109,7 +129,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
               Edit profile
             </DropdownItem>
           </li>
-          <li>
+          {/* <li>
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
@@ -158,7 +178,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
               </svg>
               Support
             </DropdownItem>
-          </li>
+          </li> */}
         </ul>
               {/* real logout button */}
         <button
