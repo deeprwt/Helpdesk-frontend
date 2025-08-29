@@ -52,6 +52,11 @@ import ChatIcon from "./chat.svg";
 import MoreDotIcon from "./more-dot.svg";
 import BellIcon from "./bell.svg";
 
+// import by deepak 
+import Ticket from "./ticket.svg";
+import LoadClockIcon from "./load-clock-icon.svg";
+import SolveIcon from "./solve-icon.svg";
+
 export {
   DownloadIcon,
   BellIcon,
@@ -106,4 +111,7 @@ export {
   HorizontaLDots,
   ChevronUpIcon,
   ChatIcon,
+  Ticket,
+  LoadClockIcon,
+  SolveIcon,
 };
