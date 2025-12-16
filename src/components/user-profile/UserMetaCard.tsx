@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useModal } from "../../hooks/useModal";
-import { Modal } from "../ui/modal";
+// import { useModal } from "../../hooks/useModal";
+// import { Modal } from "../ui/modal";
 import Image from "next/image";
 
 type UserProfile = {
@@ -19,7 +19,7 @@ type UserProfile = {
 };
 
 export default function UserMetaCard() {
-  const { isOpen, openModal, closeModal } = useModal();
+  // const { isOpen, openModal, closeModal } = useModal();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 

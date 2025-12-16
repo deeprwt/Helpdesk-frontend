@@ -1,11 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Badge from "../ui/badge/Badge";
+// import Badge from "../ui/badge/Badge";
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  BoxIconLine,
-  GroupIcon,
   Ticket,
   SolveIcon,
   LoadClockIcon,
